@@ -4,6 +4,9 @@
 	// ühenduse loomiseks kasuta
 	require_once("../configglobal.php");
 	$database = "if15_romil_2";
+	
+	// paneme sessiooni käima, saame kasutada $_SESSION muutujaid
+	session_start();
 
 	
 	// lisame kasutaja ab'i
@@ -30,6 +33,14 @@
 		$stmt->execute();
 		if($stmt->fetch()){
 			echo "kasutaja id=".$id_from_db;
+			
+			$_SESSION["id_from_db"] = $id_from_db;
+			$_SESSION["user_email"] = $email_from_db;
+			
+			//suunan kasutaja data.php lehele
+			header("Location: data.php");
+			
+			
 		}else{
 			echo "Wrong password or email!";
 		}
