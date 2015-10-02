@@ -1,4 +1,7 @@
 <?php
+
+	//laeme funktsiooni failis
+	require_once("functions.php");
 	
   // muuutujad errorite jaoks
 	$email_error = "";
@@ -40,7 +43,7 @@
 				$password_hash = hash("sha512", $password);
 				
 				// functions php failis käivitan funktsiooni
-				loginUser();
+				loginUser($email, $password_hash);
 			}
 
 		} // login if end
@@ -74,7 +77,7 @@
 				echo $password_hash;
 				
 				// functions.php failis käivina funktsiooni
-				createUser();
+				createUser($create_email, $password_hash);
 				
 			}
 

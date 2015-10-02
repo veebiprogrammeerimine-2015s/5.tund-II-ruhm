@@ -7,9 +7,9 @@
 
 	
 	// lisame kasutaja ab'i
-	function createUser(){
-		
-		$mysqli = new mysqli($servername, $server_username, $server_password, $database);
+	function createUser($create_email, $password_hash){
+		// globals on muutuja kõigist php failidest mis on ühendatud
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?, ?)");
 		$stmt->bind_param("ss", $create_email, $password_hash);
@@ -20,9 +20,9 @@
 	}
 	
 	//logime sisse
-	function loginUser(){
+	function loginUser($email, $password_hash){
 		
-		$mysqli = new mysqli($servername, $server_username, $server_password, $database);
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $password_hash);
