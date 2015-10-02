@@ -20,6 +20,41 @@
 	
 	$car_plate = $color = $car_plate_error = $color_error = "";
 	
+	// et ei ole tühjad
+	// clean input
+	// salvestate
+	
+	if(isset($_POST["create"])){
+
+		if ( empty($_POST["car_plate"]) ) {
+			$car_plate_error = "See väli on kohustuslik";
+		}else{
+			$car_plate = cleanInput($_POST["car_plate"]);
+		}
+
+		if ( empty($_POST["color"]) ) {
+			$color_error = "See väli on kohustuslik";
+		} else {
+			$color = cleanInput($_POST["color"]);
+		}
+
+		if(	$car_plate_error == "" && $color_error == ""){
+			
+			// functions.php failis käivina funktsiooni
+			createCarPlate($car_plate, $color);
+			
+		}
+
+    } // create if end
+	
+	function cleanInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
+	
+	
 	
 ?>
 

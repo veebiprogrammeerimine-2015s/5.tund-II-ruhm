@@ -49,4 +49,21 @@
 		$mysqli->close();
 	}
 	
+	
+	function createCarPlate($car_plate, $color){
+		// globals on muutuja kõigist php failidest mis on ühendatud
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, number_plate, color) VALUES (?, ?, ?)");
+		$stmt->bind_param("iss", $_SESSION["id_from_db"], $car_plate, $color);
+		$stmt->execute();
+		echo $stmt->error;
+		$stmt->close();
+		
+		$mysqli->close();		
+	}
+	
+	
+	
+	
 ?>
