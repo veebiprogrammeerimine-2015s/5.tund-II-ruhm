@@ -41,7 +41,18 @@
 		if(	$car_plate_error == "" && $color_error == ""){
 			
 			// functions.php failis käivina funktsiooni
-			createCarPlate($car_plate, $color);
+			// msq on message funktsioonist mis tagasi saadame
+			$msg = createCarPlate($car_plate, $color);
+			
+			if($msg != ""){
+				//salvestamine õnnestus
+				// teen tühjaks input value'd
+				$car_plate = "";
+				$color = "";
+								
+				echo $msg;
+				
+			}
 			
 		}
 

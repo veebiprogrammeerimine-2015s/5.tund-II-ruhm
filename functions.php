@@ -56,14 +56,43 @@
 		
 		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, number_plate, color) VALUES (?, ?, ?)");
 		$stmt->bind_param("iss", $_SESSION["id_from_db"], $car_plate, $color);
-		$stmt->execute();
-		echo $stmt->error;
-		$stmt->close();
 		
-		$mysqli->close();		
+		$message = "";
+		
+		if($stmt->execute()){
+			// see on tõene siis kui sisestus ab'i õnnestus
+			$message = "Edukalt sisestatud andmebaasi";
+			
+		}else{
+			// execute on false, miski läks katki
+			echo $stmt->error;
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+
+		return $message;
+		
 	}
 	
 	
+	/*
+	// return sample
+	
+	function welcome($name){
+		$string = "Tere ".$name;
+		return $string;
+		
+		// mis on pärast returni seda ei käivitata
+		echo "hellooooo";
+		
+	}
+	
+	$str = welcome("Romil");
+	
+	echo $str;
+	
+	*/
 	
 	
 ?>
